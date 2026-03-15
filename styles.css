@@ -1,0 +1,28 @@
+body{
+    font-family: 'Times New Roman', Times, serif;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff4e7
+}
+
+h1{
+    font-size: 36px;
+}
+
+#quiz-container, #score-container {  
+    background-color: white;  
+    width: 50%;  
+    margin: 50px auto;  
+    padding: 20px;  
+    border-radius: 8px;
+    justify-items: center;
+}
+
+button{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 14px;
+    padding: 5px 10px;
+    background-color: bisque;
+    border-radius: 3px;
+}
+
