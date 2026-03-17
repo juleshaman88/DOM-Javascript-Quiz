@@ -15,7 +15,7 @@ h1{
 
 #quizContainer, #scoreContainer {  
     background-color: #ebffeb;
-    border: groove 2px #75ca64;
+    border: groove 2px #2aa813;
     width: 50%;  
     margin: 20px;
     padding: 20px;  
@@ -32,7 +32,7 @@ button{
 }
 
 button:hover{
-    background-color: #75ca64;
+    background-color: #2aa813;
 }
 
 #introParagraph, #questionContainer, #optionsContainer{
