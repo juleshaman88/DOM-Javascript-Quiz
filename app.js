@@ -1,6 +1,6 @@
 const introParagraph = document.getElementById("introParagraph");
-const createQuestionButton = document.getElementById("questionContainer");
-const createOptions = document.getElementById("optionsContainer");
+const questionContainer = document.getElementById("questionContainer");
+const optionsContainer = document.getElementById("optionsContainer");
 const nextButton = document.getElementById("nextButton");
 const scoreContainer = document.getElementById("scoreContainer");
 const scoreDisplay = document.getElementById("score");
@@ -10,85 +10,126 @@ let currentQuestionIndex = 0;
 let score = 0;
 let attemptCount = 0;
 
-const quizData = [{
+const quizData = [
+  {
     question: "What type of brackets do arrays use?",
     options: ["{Curly Brackets}", "[Square Brackets]", "(Round Brackets)", "<Angle Brackets>"],
     answer: 1
-},
-{
-    question: "What does continue do inside a loop?",
-    options: ["Skips a current iteration and moves onto the next in the loop.", "Restarts the loop from the beginning.", "Terminates the loop without finishing.", "Exits the loop completely."],
+  },
+  {
+    question: "What does `continue` do inside a loop?",
+    options: [
+      "Skips a current iteration and moves onto the next in the loop.",
+      "Restarts the loop from the beginning.",
+      "Terminates the loop without finishing.",
+      "Exits the loop completely."
+    ],
     answer: 0
-},
-{
+  },
+  {
     question: "If I write for (let i = 10; i > 0; i--), what direction does the loop move?",
-    options: ["The loop moves in a randomized order.", "The loop does not execute.", "The loop moves in a descending order.", "The loop counts in an ascending order."],
+    options: [
+      "The loop moves in a randomized order.",
+      "The loop does not execute.",
+      "The loop moves in a descending order.",
+      "The loop counts in an ascending order."
+    ],
     answer: 2
-},
-{
+  },
+  {
     question: "What is the main benefit of separating the CSS from the JavaScript code?",
-    options: ["It makes the script run faster.", "It prevents items from working.", "It allows CSS to be reused and keep code cleaner.", "It hides HTML content."],
+    options: [
+      "It makes the script run faster.",
+      "It prevents items from working.",
+      "It allows CSS to be reused and keep code cleaner.",
+      "It hides HTML content."
+    ],
     answer: 2
-},
-{
+  },
+  {
     question: "Where do you write JavaScript in a web project?",
-    options: ["In an image file.", "In the CSS file.", "In your browser's console bar.", "In the .js file that is linked to HTML using the <script> tag."],
-    answer: 3},
-{    question: "What is the MAIN purpose of a loop in programming?",
-    options: ["To add color to web pages.", "To store information", "To repeat instructiosn until a condition is met.", "To make decisions between two options."],
-    answer: 2 }];
+    options: [
+      "In an image file.",
+      "In the CSS file.",
+      "In your browser's console bar.",
+      "In a .js file linked to the HTML using the <script> tag."
+    ],
+    answer: 3
+  },
+  {
+    question: "What is the MAIN purpose of a loop in programming?",
+    options: [
+      "To add color to web pages.",
+      "To store information.",
+      "To repeat instructions until a condition is met.",
+      "To make decisions between two options."
+    ],
+    answer: 2
+  }
+];
 
-function updateIntro(){
-    attemptCount++;
-    const intros = [
-    "Welcome to the Javascript Fundamentals Quiz! Test your knowledge below.",
-    "Back for round two? Have your notes ready - let's go!",
-    "Third time is a charm - try taking your time!"   ]
+function updateIntro() {
+  attemptCount++;
+  const intros = [
+    "Welcome to the JavaScript Fundamentals Quiz! Test your knowledge below.",
+    "Ready for another round? Let’s see if you can beat your last score!",
+    "Back again? A coding legend in the making!",
+    "You’re unstoppable! Let’s improve that score even more."
+  ];
+  introParagraph.textContent = intros[Math.min(attemptCount - 1, intros.length - 1)];
 }
 
-function createQuestion(){
-    const current = quizData (currentQuestionIndex);
-    questionContainer.textContent = current.question;
-    optionsContainer.innerHTML = "";
-    current.options.forEach((optionText, index) => {
-        const button = document.createElement("button");
-        button.textContent = optionText;
-        button.addEventListener("click", () => slectAnswer(index));
-        optionsContainer.appendChild(button);
-    })
+function showQuestion() {
+  const current = quizData[currentQuestionIndex];
+  questionContainer.textContent = current.question;
+
+  optionsContainer.innerHTML = "";
+  current.options.forEach((optionText, index) => {
+    const button = document.createElement("button");
+    button.textContent = optionText;
+    button.classList.add("optionButton");
+    button.addEventListener("click", () => selectAnswer(index));
+    optionsContainer.appendChild(button);
+  });
 }
 
 function selectAnswer(selectedIndex) {
-    const correctIndex = quizData [currentQuestionIndex].answer;
-    if (selectedIndex === correctIndex) {
-        score++;
-    }
-    currentQuestionIndex++;
-    if (currentQuestionIndex < quizData.length){
-        showQuestion();
-    } else {
-        showScore();
-    }
+  const correctIndex = quizData[currentQuestionIndex].answer;
+  if (selectedIndex === correctIndex) {
+    score++;
+  }
+
+  currentQuestionIndex++;
+
+  if (currentQuestionIndex < quizData.length) {
+    showQuestion();
+  } else {
+    showScore();
+  }
 }
 
 function showScore() {
-    document.getElementById("quizContainer").classList.add("hidden");
-    scoreContainer.classList.remove("hidden");
-    scoreDisplay.textContent = `$(score)' / $(quizData.length)`;
+  document.getElementById("quizContainer").classList.add("hidden");
+  scoreContainer.classList.remove("hidden");
+  scoreDisplay.textContent = `${score} / ${quizData.length}`;
 }
 
-function restartQuiz () {
-    currentquestionIndex = 0;
-    score = 0;
-    scoreContainer.classList.add("hidden");
-    document.getElementById("quizContainer").classList.remove("hidden");
-    updateIntro();
-    showQuestion();
+function restartQuiz() {
+  currentQuestionIndex = 0;
+  score = 0;
+
+  scoreContainer.classList.add("hidden");
+  document.getElementById("quizContainer").classList.remove("hidden");
+  updateIntro();
+
+  showQuestion();
 }
 
-nextButton.addEventListener.add("click", () => {
-    nextButton.classList.add("hidden");
-    updateIntro ();
-    showQuestion();
-}); 
+
+nextButton.addEventListener("click", () => {
+  nextButton.classList.add("hidden"); 
+  updateIntro();
+  showQuestion();
+});
+
 restartButton.addEventListener("click", restartQuiz);

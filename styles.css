@@ -11,6 +11,7 @@ body{
 
 h1{
     font-size: 36px;
+    font-weight: 600;
 }
 
 #quizContainer, #scoreContainer {  
@@ -35,11 +36,28 @@ button:hover{
     background-color: #2aa813;
 }
 
-#introParagraph, #questionContainer, #optionsContainer{
+#introParagraph{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
+    color: black;
+    font-weight: 600;
+    padding-bottom: 10px;
+}
+
+#questionContainer, #optionsContainer{
     font-family: 'Times New Roman', Times, serif;
     font-size: 14px;
     color: black;
     align-items: center;
     justify-content: center;
     padding: 10px;
+}
+
+.optionButton {
+    margin: 10px;
+    padding: 10px;
+}
+
+.optionButton:hover {
+    background-color: rgb(243, 188, 122);
 }
