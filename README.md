@@ -1,0 +1,1 @@
+Click the "Venture Forth" button to start the quiz. The score will showcase at the bottom in the Score Container. The quiz will reset with a new introduction sentence each time "Restart Quiz" is clicked - up to four times.
