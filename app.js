@@ -91,6 +91,8 @@ function showQuestion() {
     button.addEventListener("click", () => selectAnswer(index));
     optionsContainer.appendChild(button);
   });
+  scoreDisplay.textContent = `Current Score: ${score} / ${quizData.length}`;
+  scoreContainer.classList.remove("hidden");
 }
 
 function selectAnswer(selectedIndex) {
@@ -98,38 +100,42 @@ function selectAnswer(selectedIndex) {
   if (selectedIndex === correctIndex) {
     score++;
   }
+  scoreDisplay.textContent = `Current Score: ${score} / ${quizData.length}`;
+  scoreContainer.classList.remove("hidden");
 
   currentQuestionIndex++;
 
   if (currentQuestionIndex < quizData.length) {
     showQuestion();
   } else {
-    showScore();
+    showFinalScore();
   }
 }
 
-function showScore() {
+function showFinalScore() {
   document.getElementById("quizContainer").classList.add("hidden");
+  nextButton.classList.add("hidden");
   scoreContainer.classList.remove("hidden");
-  scoreDisplay.textContent = `${score} / ${quizData.length}`;
+  scoreDisplay.textContent = `Final Score: ${score} / ${quizData.length}`;
 }
 
 function restartQuiz() {
   currentQuestionIndex = 0;
   score = 0;
 
-  scoreContainer.classList.add("hidden");
   document.getElementById("quizContainer").classList.remove("hidden");
+  scoreContainer.classList.add("hidden");
   updateIntro();
-
   showQuestion();
 }
 
 
 nextButton.addEventListener("click", () => {
-  nextButton.classList.add("hidden"); 
+  nextButton.style.display = "none";
   updateIntro();
   showQuestion();
 });
+
+nextButton.classList.add("hidden");
 
 restartButton.addEventListener("click", restartQuiz);

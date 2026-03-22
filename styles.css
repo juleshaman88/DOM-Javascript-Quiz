@@ -23,6 +23,11 @@ h1{
     border-radius: 8px;
 }
 
+#scoreContainer {
+    font-size: 18px;
+    font-weight: 600;
+}
+
 button{
     font-family: 'Times New Roman', Times, serif;
     font-size: 14px;
