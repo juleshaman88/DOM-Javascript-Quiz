@@ -66,3 +66,17 @@ button:hover{
 .optionButton:hover {
     background-color: rgb(243, 188, 122);
 }
+
+.optionButton.correct{
+    background-color: green;
+    color: white;
+}
+
+.optionButton.incorrect{
+    background-color: red;
+    color: white;
+}
+
+.optionButton {
+    transition: background-color 0.3s ease;
+}

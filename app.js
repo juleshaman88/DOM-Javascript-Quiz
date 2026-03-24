@@ -82,39 +82,50 @@ function updateIntro() {
 function showQuestion() {
   const current = quizData[currentQuestionIndex];
   questionContainer.textContent = current.question;
-
   optionsContainer.innerHTML = "";
   current.options.forEach((optionText, index) => {
     const button = document.createElement("button");
     button.textContent = optionText;
     button.classList.add("optionButton");
-    button.addEventListener("click", () => selectAnswer(index));
+    button.addEventListener("click", () => selectAnswer(index, button));
     optionsContainer.appendChild(button);
   });
   scoreDisplay.textContent = `Current Score: ${score} / ${quizData.length}`;
   scoreContainer.classList.remove("hidden");
 }
 
-function selectAnswer(selectedIndex) {
+function selectAnswer(selectedIndex, selectedButton) {
   const correctIndex = quizData[currentQuestionIndex].answer;
+  const buttons = document.querySelectorAll(".optionButton");
+  buttons.forEach(btn => btn.disabled = true);
   if (selectedIndex === correctIndex) {
     score++;
+    selectedButton.classList.add("correct");
+  } else {
+    selectedButton.classList.add("incorrect");
+    buttons[correctIndex].classList.add("correct");
   }
+
   scoreDisplay.textContent = `Current Score: ${score} / ${quizData.length}`;
   scoreContainer.classList.remove("hidden");
 
-  currentQuestionIndex++;
-
-  if (currentQuestionIndex < quizData.length) {
+  setTimeout(() =>{
+    currentQuestionIndex++;
+    if (currentQuestionIndex < quizData.length) {
     showQuestion();
   } else {
     showFinalScore();
   }
+  }, 1000);
 }
 
 function showFinalScore() {
   document.getElementById("quizContainer").classList.add("hidden");
   nextButton.classList.add("hidden");
+  questionContainer.style.display = "none";
+  optionsContainer.style.display = "none";
+  introParagraph.style.display = "none";
+  document.getElementById*("quizContainer").classList.add("hidden");
   scoreContainer.classList.remove("hidden");
   scoreDisplay.textContent = `Final Score: ${score} / ${quizData.length}`;
 }
@@ -122,9 +133,12 @@ function showFinalScore() {
 function restartQuiz() {
   currentQuestionIndex = 0;
   score = 0;
-
+  questionContainer.style.display = "block";
+  optionsContainer.style.display = "block";
+  introParagraph.style.display = "block";
   document.getElementById("quizContainer").classList.remove("hidden");
   scoreContainer.classList.add("hidden");
+  
   updateIntro();
   showQuestion();
 }
