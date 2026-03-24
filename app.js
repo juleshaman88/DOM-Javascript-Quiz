@@ -105,9 +105,10 @@ function selectAnswer(selectedIndex, selectedButton) {
     selectedButton.classList.add("incorrect");
     buttons[correctIndex].classList.add("correct");
   }
-
-  scoreDisplay.textContent = `Current Score: ${score} / ${quizData.length}`;
-  scoreContainer.classList.remove("hidden");
+  if (currentQuestionIndex < quizData.length){
+    scoreDisplay.textContent = `Current Score: ${score} / ${quizData.length}`;
+    scoreContainer.classList.remove("hidden");
+  }
 
   setTimeout(() =>{
     currentQuestionIndex++;
@@ -120,12 +121,11 @@ function selectAnswer(selectedIndex, selectedButton) {
 }
 
 function showFinalScore() {
-  document.getElementById("quizContainer").classList.add("hidden");
-  nextButton.classList.add("hidden");
   questionContainer.style.display = "none";
   optionsContainer.style.display = "none";
   introParagraph.style.display = "none";
-  document.getElementById*("quizContainer").classList.add("hidden");
+  document.getElementById("quizContainer").classList.add("hidden");
+  nextButton.classList.add("hidden");
   scoreContainer.classList.remove("hidden");
   scoreDisplay.textContent = `Final Score: ${score} / ${quizData.length}`;
 }
